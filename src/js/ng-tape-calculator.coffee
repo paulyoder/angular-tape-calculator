@@ -11,7 +11,8 @@ angular.module('tape-calculator', []).directive 'ngTapeCalculator',
                 elemBounding = elem[0].getBoundingClientRect()
                 tapeWrapper = angular.element "<div class='tape-calculator-wrapper'></div>"
                 angular.element(document.body).append tapeWrapper
-                tapeLeft = elemBounding.left + elemBounding.width - tapeWrapper.width
+                console.log "left=#{elemBounding.left}, width=#{elemBounding.width}, offsetWidth=#{tapeWrapper.offsetWidth}"
+                tapeLeft = elemBounding.left + elemBounding.width - 150
                 tapeWrapper.css 'left', "#{tapeLeft}px"
                 tapeWrapper.css 'top', "#{elemBounding.top}px"
                 tapeEl = angular.element "<div class='tape-calculator-container'></div>"
@@ -35,7 +36,7 @@ angular.module('tape-calculator', []).directive 'ngTapeCalculator',
                 innerHtml = ''
                 for tapeLine in tape
                     innerHtml += "
-                        <div class='clearfix #{operatorClasses[tapeLine.symbol]}'>
+                        <div class='#{operatorClasses[tapeLine.symbol]}' style='clear: both'>
                             <div class='tape-calculator-number'>
                                 #{ addCommasToInteger(tapeLine.value) }
                             </div>
@@ -76,10 +77,12 @@ angular.module('tape-calculator', []).directive 'ngTapeCalculator',
                             entry = evaluate()
                             elem.val entry
                         
+                        evt.preventDefault()
                         return false
                         
                     when 27 # Esc  
                         updateModelAndClose()
+                        evt.preventDefault()
                         return false
 
                 return true
@@ -97,7 +100,8 @@ angular.module('tape-calculator', []).directive 'ngTapeCalculator',
                     elem.val().length != 0 and
                     evt.target.selectionStart == elem.val().length
 
-                return true if not TapeCalculator.isOperator(key) or key == '-' and not treatAsMinusSign
+                return true if not TapeCalculator.isOperator(key) or 
+                    key == '-' and not treatAsMinusSign
                                           
                 if not scope.calculator?
                     scope.calculator = new TapeCalculator 
