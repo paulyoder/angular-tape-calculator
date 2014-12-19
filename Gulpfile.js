@@ -29,3 +29,7 @@ gulp.task('copyExamples', ['js', 'css'], function() {
     gulp.src(['dist/ng-tape-calculator.js', 'dist/tape-calculator.css'])
       .pipe(gulp.dest('examples'));
 });
+
+gulp.task('watch', function() {
+  gulp.watch('src/**/*', ['default']);
+});
