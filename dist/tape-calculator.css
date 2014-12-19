@@ -1,0 +1,33 @@
+.tape-calculator-wrapper {
+  position: fixed;
+  z-index: 2222;
+  width: 150px;
+}
+
+.tape-calculator-container {
+  width: 150px;
+  background: whitesmoke;
+  border: 1px solid gray;
+  border-top: 2px dotted silver;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  bottom: 2px;
+  right: 0;
+  min-height: 100px;
+  box-shadow: 0 3px 20px 0 #333;
+}
+
+.tape-calculator-number {
+  text-align: right;
+  float: right;
+}
+
+.tape-calculator-operator {
+  text-align: right;
+  width: 12px;
+}
+
+.tape-calculator-line-equals {
+  border-top: 1px solid gray;
+}
