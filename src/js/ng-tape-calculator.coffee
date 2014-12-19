@@ -11,7 +11,6 @@ angular.module('tape-calculator', []).directive 'ngTapeCalculator',
                 elemBounding = elem[0].getBoundingClientRect()
                 tapeWrapper = angular.element "<div class='tape-calculator-wrapper'></div>"
                 angular.element(document.body).append tapeWrapper
-                console.log "left=#{elemBounding.left}, width=#{elemBounding.width}, offsetWidth=#{tapeWrapper.offsetWidth}"
                 tapeLeft = elemBounding.left + elemBounding.width - 150
                 tapeWrapper.css 'left', "#{tapeLeft}px"
                 tapeWrapper.css 'top', "#{elemBounding.top}px"
@@ -114,9 +113,8 @@ angular.module('tape-calculator', []).directive 'ngTapeCalculator',
                 
                 if entry?
                     elem.val entry
-                    evt.preventDefault()
-                    return false
-                    
-                return true
+                
+                evt.preventDefault()
+                return false
     }
     
