@@ -3,9 +3,9 @@ var rename    = require('gulp-rename');
 var minifycss = require('gulp-minify-css');
 var coffee    = require('gulp-coffee');
 var concat    = require('gulp-concat');
-var uglify    = require('gulp-uglify')
+var uglify    = require('gulp-uglify');
 
-gulp.task('default', ['js', 'css']);
+gulp.task('default', ['js', 'css', 'copyExamples']);
 
 gulp.task('js', function() {
   gulp.src(['src/js/tape-calculator.coffee', 'src/js/ng-tape-calculator.coffee'])
@@ -23,4 +23,9 @@ gulp.task('css', function() {
     .pipe(rename({suffix: '.min'}))
     .pipe(minifycss())
     .pipe(gulp.dest('dist')); 
+});
+
+gulp.task('copyExamples', ['js', 'css'], function() {
+    gulp.src(['dist/ng-tape-calculator.js', 'dist/tape-calculator.css'])
+      .pipe(gulp.dest('examples'));
 });
